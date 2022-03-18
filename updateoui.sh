@@ -28,6 +28,4 @@ then
 echo "oui.txt didn't change!"
 rm oui.txt.old
 
-else
-echo "oui.txt" changed. please commit and maybe delete oui.txt.old!
 fi
