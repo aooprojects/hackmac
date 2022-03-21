@@ -47,9 +47,18 @@ echo Normalized MAC: $NMAC
 
 VEND=`echo $NMAC | sed 's/^\(..\)-\(..\)-\(..\).*/\1-\2-\3/'`
 
-echo Vendor $VEND
+echo vendor OUI: $VEND
 
-grep -A 5 $VEND ${OPATH}/oui.txt
+OUITXT="${OPATH}/oui.txt"
+
+if [ ! -f ${OUITXT} ]
+then
+  echo "oui.txt not found. vendor lookup not available! use updateoui.sh to download this file"
+  # prevent an error message from grep below
+  OUITXT="/dev/null"
+fi
+
+grep -A 5 $VEND ${OUITXT}
 if [ "$?" -ne "0" ]
 then
     echo "Could not find a vendor"
